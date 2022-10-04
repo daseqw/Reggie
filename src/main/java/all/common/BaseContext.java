@@ -21,4 +21,5 @@ public class BaseContext {
     public static Long getCurrentId(){
         return (Long) threadLocal.get();
     }
+
 }
