@@ -15,6 +15,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.AbstractList;
@@ -106,6 +108,8 @@ public class SetmealController {
      * @return
      */
     @DeleteMapping
+    //清理缓存，allEntries=true要写，默认是false 意思是删除 setmealCache 这个分类下 所有的缓存数据
+    @CacheEvict(value = "setmealCache",allEntries = true)
     public R<String> delete(Long[] ids){
         List<Long> list = Arrays.asList(ids);
         LambdaQueryWrapper<Setmeal> setmealLambdaQueryWrapper = new LambdaQueryWrapper<Setmeal>();
@@ -127,6 +131,8 @@ public class SetmealController {
      * @return
      */
     @GetMapping("/{setmealId}")
+    //清理缓存，allEntries=true要写，默认是false 意思是删除 setmealCache 这个分类下 所有的缓存数据
+    @CacheEvict(value = "setmealCache",allEntries = true)
     public R<SetmealDto> update(@PathVariable Long setmealId){
         //接受SetmealDto
         SetmealDto setmealDto = new SetmealDto();
@@ -206,6 +212,8 @@ public class SetmealController {
      * @return
      */
     @PostMapping
+    //清理缓存，allEntries=true要写，默认是false
+    @CacheEvict(value = "setmealCache",allEntries = true)
     public R<String> save(@RequestBody SetmealDto setmealDto){
         //将setmealDto中的信息拷贝给setmeal
         Setmeal setmeal = new Setmeal();
@@ -231,6 +239,9 @@ public class SetmealController {
      * @return
      */
     @GetMapping("/list")
+    //使用注解缓存
+    //                                       固定写法，#setmeal表示的是参数的哪个setmeal
+    @Cacheable(value = "setmealCache",key = "#setmeal.categoryId")
     public R<List<Setmeal>> showSetmeal(Setmeal setmeal){
         LambdaQueryWrapper<Setmeal> setmealLambdaQueryWrapper = new LambdaQueryWrapper<Setmeal>();
         setmealLambdaQueryWrapper.eq(setmeal.getCategoryId()!= null,Setmeal::getCategoryId,setmeal.getCategoryId());

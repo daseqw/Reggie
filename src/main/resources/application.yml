@@ -16,6 +16,9 @@ spring:
   redis:
     host: 192.168.153.100
     port: 6379
+  cache:
+    redis:
+      time-to-live: 1800000
 #  mail:
 #    host: smtp.qq.com
 #    username: 1543138380@qq.com
