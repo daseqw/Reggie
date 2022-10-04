@@ -13,6 +13,9 @@ spring:
     host: smtp.qq.com
     username: 546147560@qq.com
     password: xpyneialmwrsbdhe
+  redis:
+    host: 192.168.153.100
+    port: 6379
 #  mail:
 #    host: smtp.qq.com
 #    username: 1543138380@qq.com
