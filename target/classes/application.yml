@@ -34,4 +34,5 @@ mybatis-plus:
       id-type: ASSIGN_ID
 #      上传文件存储的位置
 reggie:
-  path: G:\testImg\
+  #path: G:\testImg\
+  path: /home/user/reggieapp/img

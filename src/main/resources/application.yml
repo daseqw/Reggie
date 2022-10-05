@@ -35,4 +35,4 @@ mybatis-plus:
 #      上传文件存储的位置
 reggie:
   #path: G:\testImg\
-  path: /home/user/reggieapp/img
+  path: /home/user/reggieapp/img/
